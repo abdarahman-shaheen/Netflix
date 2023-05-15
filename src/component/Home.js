@@ -1,5 +1,4 @@
 import Navbar from "./Navbar";
-import axios from "axios";
 import { useEffect,useState } from "react";
 
 import MovieList from "./MovieList";
