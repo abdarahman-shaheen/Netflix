@@ -2,13 +2,31 @@
 import {Button} from "react-bootstrap";
 import { Card } from "react-bootstrap";
 import axios from "axios";
+import ModalMovie from "./ModalMovie";
+import { useState } from "react";
+
+
+
 function Movie(props){
     const imagePath="http://image.tmdb.org/t/p/w500/";
 
-    const addToFav = (item) =>{
+const [showFlag, setShowFlag] = useState(false);
+    const [clickedMovie, setclickedMovie] = useState({});
+    
+    const handleShow = (item) => {
+        setShowFlag(true)
+        // console.log(item)
+        setclickedMovie(item)
+    }
+    const handleClose = () => {
+        setShowFlag(false)
+    }
+    const addToFav = async (item) =>{
+        console.log("home obj",item)
+        item.comment=" "
         const serverURL = `http://localhost:3001/addMovies`;
-        axios.post(serverURL , item )
-        .then(response=>{
+        await axios.post(serverURL , item )
+        .then( response=>{
             console.log(response.data)
         })
         .catch((error)=>{
@@ -29,11 +47,16 @@ return(
                             <Card.Text>
                                <p>{item.overview}</p>
                             </Card.Text>
-                            <Button variant="primary" onClick={()=>{addToFav(item)}}>Add to Favorite</Button>
+                            <Button variant="primary" onClick={()=>{ addToFav(item);handleShow(item) }}>Add to Favorite</Button>
+
                         </Card.Body>
                     </Card>
                 )
-            })}
+            })
+            
+            }
+                                    <ModalMovie showFlag={showFlag} handleClose={handleClose} clickedMovie={clickedMovie}/>
+
     </>
 )
 }
