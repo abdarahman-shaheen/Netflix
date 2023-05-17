@@ -24,7 +24,7 @@ const [showFlag, setShowFlag] = useState(false);
     const addToFav = async (item) =>{
         console.log("home obj",item)
         item.comment=" "
-        const serverURL = `http://localhost:3001/addMovies`;
+        const serverURL = `${process.env.REACT_APP_serverURL}/addMovies`;
         await axios.post(serverURL , item )
         .then( response=>{
             console.log(response.data)
@@ -32,12 +32,12 @@ const [showFlag, setShowFlag] = useState(false);
         .catch((error)=>{
             console.log(error)
         })
+        
         // console.log(item)
     }
 return(
-    <>
+    <div style={{display:"flex" , flexWrap:"wrap",gap:"20px" ,justifyContent:"center"}}>
       {/* <button onClick={getAllMemes}>Send a req</button> */}
-      <h1>All movies</h1>
             {props.MovieCard.map(item => {
                 return (
                     <Card style={{ width: '18rem' }} key={item.id}>
@@ -57,7 +57,7 @@ return(
             }
                                     <ModalMovie showFlag={showFlag} handleClose={handleClose} clickedMovie={clickedMovie}/>
 
-    </>
+    </div>
 )
 }
 

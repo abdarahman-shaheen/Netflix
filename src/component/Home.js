@@ -1,4 +1,4 @@
-import Navbar from "./Navbar";
+import Navbar from "./Navbars";
 import { useEffect,useState } from "react";
 
 import MovieList from "./MovieList";
