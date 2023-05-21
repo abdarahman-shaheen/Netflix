@@ -8,7 +8,7 @@ function ModalMovie(props){
     const imagePath="http://image.tmdb.org/t/p/w500/";
 
 
-    const AddComment= async (e) =>{
+    const AddComment=  (e) =>{
  e.preventDefault();
         const obj = {
             title: `${props.clickedMovie.title}`,
@@ -18,7 +18,7 @@ function ModalMovie(props){
         }
       console.log("update obj",obj);
         const serverURL = `${process.env.REACT_APP_serverURL}/updateMovies/${props.clickedMovie.id}`;
-       await axios.put(serverURL ,obj )
+        axios.put(serverURL ,obj )
         .then(response=>{
             console.log(response.data)
         })

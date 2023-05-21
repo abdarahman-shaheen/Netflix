@@ -14,25 +14,25 @@ const [showFlag, setShowFlag] = useState(false);
     const [clickedMovie, setclickedMovie] = useState({});
     
     const handleShow = (item) => {
-        setShowFlag(true)
         // console.log(item)
         setclickedMovie(item)
     }
     const handleClose = () => {
         setShowFlag(false)
     }
-    const addToFav = async (item) =>{
+    const addToFav =  (item) =>{
         console.log("home obj",item)
         item.comment=" "
         const serverURL = `${process.env.REACT_APP_serverURL}/addMovies`;
-        await axios.post(serverURL , item )
+         axios.post(serverURL , item )
         .then( response=>{
             console.log(response.data)
         })
         .catch((error)=>{
             console.log(error)
         })
-        
+        setShowFlag(true)
+
         // console.log(item)
     }
 return(
